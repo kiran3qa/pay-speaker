@@ -8,6 +8,7 @@ import android.text.TextUtils
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
+import android.os.Bundle
 
 class MainActivity : FlutterActivity() {
 
@@ -37,6 +38,13 @@ class MainActivity : FlutterActivity() {
             }
     }
 
+fun Bundle.flattenToString(): String {
+  val sb = StringBuilder()
+  for (key in keySet()) {
+    sb.append(key).append("=").append(get(key)).append("; ")
+  }
+  return sb.toString().trim()
+}
     private fun isNotificationListenerEnabled(context: Context): Boolean {
         val cn = ComponentName(context, PayNotificationListener::class.java)
         val flat = Settings.Secure.getString(context.contentResolver, "enabled_notification_listeners")
